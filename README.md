@@ -1,3 +1,3 @@
-# purescript-datetime.py
+# purescript-foreign-object.py
 
-A port of datetime to purescript-python
+A port of foreign-object to purescript-python
