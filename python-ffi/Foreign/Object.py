@@ -1,7 +1,13 @@
+
+def _i(m):
+    if (type(m) == dict):
+        return m.keys()
+    return range(len(m))
+
 def _copyST(m):
     def _1():
         r = {}
-        for k in m:
+        for k in _i(m):
             r[k] = m[k]
         return r
 
@@ -17,7 +23,7 @@ def runST(f):
 
 def _fmapObject(m0, f):
     m = {}
-    for k in m0:
+    for k in _i(m0):
         m[k] = f(m0[k])
 
     return m
@@ -25,7 +31,7 @@ def _fmapObject(m0, f):
 
 def _mapWithKey(m0, f):
     m = {}
-    for k in m0:
+    for k in _i(m0):
         m[k] = f(k)(m0[k])
 
     return m
@@ -43,7 +49,7 @@ def _foldM(bind):
 
                     return _4
 
-                for k in m:
+                for k in _i(m):
                     acc = bind(acc)(g(k))
 
                 return acc
@@ -57,7 +63,7 @@ def _foldM(bind):
 
 def _foldSCObject(m, z, f, fromMaybe):
     acc = z
-    for k in m:
+    for k in _i(m):
         maybeR = f(acc)(k)(m[k])
         r = fromMaybe(None)(maybeR)
         if r is None:
@@ -69,7 +75,7 @@ def _foldSCObject(m, z, f, fromMaybe):
 
 def all(f):
     def _1(m):
-        for k in m:
+        for k in _i(m):
             if not f(k)(m[k]):
                 return False
         return True
@@ -95,7 +101,7 @@ def _lookupST(no, yes, k, m):
 def toArrayWithKey(f):
     def _1(m):
         r = []
-        for k in m:
+        for k in _i(m):
             r.append(f(k)(m[k]))
         return r
 
